@@ -4,6 +4,10 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Domain as Domain;
+use App\Post as Post;
+use App\Jobs\crawlJob as crawlJob;
+use App\Jobs\sentimentJob as sentimentJob;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,8 +28,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $domains = Domain::all();
+
+        foreach ($domains as $domain)
+        {
+            foreach ($domain->pages as $page)
+            {
+                $schedule->job(new crawlJob($page))->cron($page->frequency);
+            }
+        }
+
+        $schedule->job(new sentimentJob())->everyMinute();
     }
 
     /**
