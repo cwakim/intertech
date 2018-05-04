@@ -37,7 +37,7 @@ class sentimentJob implements ShouldQueue
         foreach($posts as $post)
         {
           $language = new LanguageClient([
-              'projectId' => 'intertech-1525349324069'
+              'projectId' => env('GOOGLE_PROJECT_ID')
           ]);
 
           $annotation = $language->analyzeSentiment($post->body);
