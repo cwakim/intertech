@@ -22,7 +22,7 @@ class CreatePagesTable extends Migration
               ->onDelete('cascade');
             $table->string('link');
             $table->string('language');
-            $table->point('location');
+            $table->string('location');
             $table->string('location_name');
             $table->string('category');
             $table->string('area');

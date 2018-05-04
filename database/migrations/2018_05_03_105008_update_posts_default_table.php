@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDomainsTable extends Migration
+class UpdatePostsDefaultTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateDomainsTable extends Migration
      */
     public function up()
     {
-        Schema::create('domains', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('link');
-            $table->string('language');
-            $table->string('location');
-            $table->timestamps();
+        Schema::table('posts', function ($table) {
+            $table->string('image')->nullable()->change();
+            $table->string('title')->nullable()->change();
+            $table->string('body', 4294967295)->nullable()->change();
         });
     }
 
@@ -30,6 +27,6 @@ class CreateDomainsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('domains');
+        //
     }
 }
