@@ -18,7 +18,7 @@ class CreateDomainsTable extends Migration
             $table->string('name');
             $table->string('link');
             $table->string('language');
-            $table->point('location');
+            $table->string('location');
             $table->timestamps();
         });
     }
