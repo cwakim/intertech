@@ -4,21 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model  {
+class Domain extends Model  {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'domains';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'remember_token'];
+    protected $fillable = ['name', 'link', 'language', 'location'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -39,6 +39,11 @@ class User extends Model  {
      *
      * @var array
      */
-    protected $dates = ['next_visit_time', 'last_visit_time'];
+    protected $dates = [];
+
+    public function pages()
+    {
+        return $this->hasMany('App\Page', 'domain_id', 'id');
+    }
 
 }

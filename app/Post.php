@@ -4,21 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model  {
+class Post extends Model  {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'posts';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'remember_token'];
+    protected $fillable = ['page_id', 'title', 'image', 'body'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -40,5 +40,10 @@ class User extends Model  {
      * @var array
      */
     protected $dates = ['next_visit_time', 'last_visit_time'];
+
+    public function page()
+    {
+        return $this->belongsTo('App\Page', 'page_id', 'id');
+    }
 
 }
